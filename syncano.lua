@@ -12,11 +12,11 @@ function Syncano.new(apiKey,instance_name)
 	self.instance_name = instance_name
 	return self
 end
-function Syncano:getDataObject(class,id)
+function Syncano:getDataObject(class,id,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then
 	    else
-	        print ( "RESPONSE: " .. event.response )
+	       callback(event.response)
 	    end
 	end
 	local headers = {}
