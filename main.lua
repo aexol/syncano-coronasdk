@@ -10,6 +10,14 @@ INSTANCE_NAME = "rough-snow-3508"
 
 Syncano = require "syncano"
 syn = Syncano(API_KEY,INSTANCE_NAME)
+
+
 syn:getDataObject("recipe",6,function (e)
+	print("\ngetDataObject:\n")
+	print(e)
+end)
+
+syn:listDataObjects("recipe",function (e)
+	print("\nlistDataObject:\n")
 	print(e)
 end)
