@@ -17,6 +17,7 @@ end
 function Syncano:createDataObject(class,obj,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then
+	    	callback("error")
 	    else
 	       callback(event.response)
 	    end
@@ -41,6 +42,7 @@ end
 function Syncano:login(username,password,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then
+	    	callback("error")
 	    else
 	       callback(event.response)
 	    end
@@ -56,6 +58,7 @@ end
 function Syncano:getDataObject(class,id,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then
+	    	callback("error")
 	    else
 	       callback(event.response)
 	    end
@@ -70,6 +73,7 @@ end
 function Syncano:listDataObjects(class,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then
+	    	callback("error")
 	    else
 	       callback(event.response)
 	    end
@@ -84,6 +88,7 @@ end
 function Syncano:test()
 	local function networkListener( event )
 	    if ( event.isError ) then
+	    	callback("error")
 	    else
 	        print ( "RESPONSE: " .. event.response )
 	    end
