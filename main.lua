@@ -5,19 +5,12 @@
 -----------------------------------------------------------------------------------------
 
 -- Your code here
-API_KEY = "90ca3b77844ecc8a592535679c7e70194808aad7"
-INSTANCE_NAME = "rough-snow-3508"
+API_KEY = "0dabf69d50d82fe61d0b185355c712ea461921eb"
+INSTANCE_NAME = "still-fire-4660"
 
 Syncano = require "syncano"
 syn = Syncano(API_KEY,INSTANCE_NAME)
 
-
-syn:getDataObject("recipe",6,function (e)
-	print("\ngetDataObject:\n")
-	print(e)
-end)
-
-syn:listDataObjects("recipe",function (e)
-	print("\nlistDataObject:\n")
+syn:filterDataObjects("planet",{ system=496, },function (e)
 	print(e)
 end)
