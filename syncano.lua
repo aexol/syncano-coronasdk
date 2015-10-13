@@ -93,6 +93,25 @@ function Syncano:updateDataObject(class,id,filter,callback)
 	params.body = json.encode(filter)
 	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/classes/"..class.."/objects/"..id.."/", "POST", networkListener, params )
 end
+function Syncano:createUser(username,password,callback)
+	local function networkListener( event )
+	    if ( event.isError ) then
+	    	callback("error")
+	    else
+	       callback(event.response)
+	    end
+	end
+	local headers = {}
+	headers["X-API-KEY"] = self.apiKey
+	headers["Content-Type"]="application/json"
+	local params = {}
+	params.headers = headers
+	params.body = json.encode({
+		username = username,
+		password = password
+	})
+	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/users/", "POST", networkListener, params )
+end
 function Syncano:login(username,password,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then
@@ -106,8 +125,11 @@ function Syncano:login(username,password,callback)
 	headers["Content-Type"]="application/json"
 	local params = {}
 	params.headers = headers
-	params.body="username="..username.."&password="..password
-	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/user/auth/", "GET", networkListener, params )
+	params.body = json.encode({
+		username = username,
+		password = password
+	})
+	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/user/auth/", "POST", networkListener, params )
 end
 
 function Syncano:getFromWebhook(class,id,callback)
