@@ -77,6 +77,21 @@ function Syncano:getDataObject(class,id,callback)
 	params.headers = headers
 	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/classes/"..class.."/objects/"..id.."/", "GET", networkListener, params )
 end
+function Syncano:deleteDataObject(class,id,callback)
+	local function networkListener( event )
+	    if ( event.isError ) then
+	    	callback("error")
+	    else
+	       callback(event.response)
+	    end
+	end
+	local headers = {}
+	headers["X-API-KEY"] = self.apiKey
+	headers["Content-Type"]="application/json"
+	local params = {}
+	params.headers = headers
+	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/classes/"..class.."/objects/"..id.."/", "DELETE", networkListener, params )
+end
 function Syncano:updateDataObject(class,id,filter,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then
@@ -132,21 +147,6 @@ function Syncano:login(username,password,callback)
 	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/user/auth/", "POST", networkListener, params )
 end
 
-function Syncano:getFromWebhook(class,id,callback)
-	local function networkListener( event )
-	    if ( event.isError ) then
-	    	callback("error")
-	    else
-	       callback(event.response)
-	    end
-	end
-	local headers = {}
-	headers["X-API-KEY"] = self.apiKey
-	headers["Content-Type"]="application/json"
-	local params = {}
-	params.headers = headers
-	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/classes/"..class.."/objects/"..id.."/", "GET", networkListener, params )
-end
 function Syncano:listDataObjects(class,callback)
 	local function networkListener( event )
 	    if ( event.isError ) then

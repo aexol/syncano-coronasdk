@@ -15,12 +15,15 @@ end)
 
 ## user login
 
+```lua
 syn:login("username_here","password_here",function ( e )
 	-- RESPONSE HERE
 	print(e)
 end)
+```
 
 ## data object create
+
 ```lua
 syn:createDataObject("class_name",{
 	name="Arthur",
@@ -30,8 +33,8 @@ syn:createDataObject("class_name",{
 	print(e)
 end)
 ```
-## data object filter
 
+## data object filter
 
 ```lua
 syn:filterDataObjects("class_name",{
@@ -43,7 +46,17 @@ end)
 ```
 
 ## data object delete
+
+```lua
+-- PASS CLASS NAME AND OBJECT ID
+syn:listDataObjects("class_name",12,function ( e )
+	-- RESPONSE HERE
+	print(e)
+end)
+```
+
 ## data object update
+
 ```lua
 syn:updateDataObject("class_name",12,{
 	country="Zimbabwe"	
@@ -52,6 +65,7 @@ syn:updateDataObject("class_name",12,{
 	print(e)
 end)
 ```
+
 ## data object get
 
 ```lua
@@ -61,6 +75,7 @@ syn:listDataObjects("class_name",12,function ( e )
 	print(e)
 end)
 ```
+
 ## data object list
 
 ```lua
