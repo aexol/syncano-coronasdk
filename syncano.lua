@@ -196,4 +196,20 @@ function Syncano:test()
 	params.headers = headers
 	network.request( "https://api.syncano.io/v1/instances/", "GET", networkListener, params )
 end
+function Syncano:runWebhook(name,obj,callback)
+	local function networkListener( event )
+	    if ( event.isError ) then
+	    	callback("error")
+	    else
+	       callback(event.response)
+	    end
+	end
+	local headers = {}
+	headers["X-API-KEY"] = self.apiKey
+	headers["Content-Type"]="application/json"
+	local params = {}
+	params.headers = headers
+	params.body = json.encode(obj)
+	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/webhooks/"..name.."/run/", "POST", networkListener, params )
+end
 return Syncano

@@ -84,3 +84,14 @@ syn:listDataObjects("class_name",function ( e )
 	print(e)
 end)
 ```
+## run webhook with params
+
+```lua
+params = {
+	user:23
+}
+syn:runWebhook("webhook_name",params,function ( e )
+	-- RESPONSE HERE
+	print(e)
+end)
+```
