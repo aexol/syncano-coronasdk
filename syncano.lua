@@ -106,7 +106,7 @@ function Syncano:updateDataObject(class,id,filter,callback)
 	local params = {}
 	params.headers = headers
 	params.body = json.encode(filter)
-	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/classes/"..class.."/objects/"..id.."/", "POST", networkListener, params )
+	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/classes/"..class.."/objects/"..id.."/", "PATCH", networkListener, params )
 end
 function Syncano:createUser(username,password,callback)
 	local function networkListener( event )
