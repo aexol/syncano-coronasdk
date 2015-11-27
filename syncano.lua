@@ -177,11 +177,17 @@ function Syncano:filterDataObjects(class,filter,callback)
 	params.headers = headers
 	newQ = {}
 	for k,v in pairs(filter) do
-		newQ[k] = {_eq=v}
+		if type(v) == "table" then
+			newQ[k] = {_in=v}
+		else
+			newQ[k] = {_eq=v}
+		end
 	end
 	ext = urlencode(json.encode(newQ))
 	network.request( "https://api.syncano.io/v1/instances/"..self.instance_name.."/classes/"..class.."/objects/?query="..ext, "GET", networkListener, params )
 end
+
+
 function Syncano:test()
 	local function networkListener( event )
 	    if ( event.isError ) then
